@@ -1,7 +1,56 @@
 from django.shortcuts import render
 import requests
 
-def payment(request):
+def home(request):
+    return render(request, 'pay/home.html')
+
+def payment_with_cart(request):
+    obj = {
+        "process": "Cart",
+        "successUrl": "http://localhost:8000/success",
+        "ipnUrl": "http://localhost:8000/ipn",
+        "cancelUrl": "http://localhost:8000/cancel",
+        "merchantId": "SB1151",
+        "merchantOrderId": "l710.0",
+        "expiresAfter": 24,
+        "totalItemsDeliveryFee": 19,
+        "totalItemsDiscount": 1,
+        "totalItemsHandlingFee": 12,
+        "totalItemsTax1": 250,
+        "totalItemsTax2": 0
+    }
+    cart = {
+        "cartitems": [
+
+        {
+
+            "itemId":"sku-01",
+
+            "itemName":"sample item",
+
+            "unitPrice":2300,
+
+            "quantity":1
+
+        },
+
+        {
+
+            "itemId":"sku-02",
+
+            "itemName":"sample item 2",
+
+            "unitPrice":2300,
+
+            "quantity":2
+
+        }
+
+        ]
+    }
+    return render(request, 'pay/index-cart.html', {'obj': obj, 'cart': cart})
+
+def payment_with_express(request):
     obj = {
         "process": "Express",
         "successUrl": "http://localhost:8000/success",
@@ -20,7 +69,7 @@ def payment(request):
         "tax1": 0.0,
         "tax2": 0.0
     }
-    return render(request, 'pay/index.html', {'obj': obj})
+    return render(request, 'pay/index-express.html', {'obj': obj})
 
 def success(request):
     ii= request.GET.get('itemId')

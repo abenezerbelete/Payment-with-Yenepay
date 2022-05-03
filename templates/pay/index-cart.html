@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Home</a>
+    <h3>Simple Payment with yenepay using Cart</h3>
+    <form action="https://test.yenepay.com/" method="POST">
+        {% csrf_token %}
+        {% for x, y in obj.items %}
+            <input type="hidden" name="{{ x }}" value="{{ y }}">
+        {% endfor %}
+        {% for s in cart.cartitems %}
+            {% with sc=forloop.counter0 %}
+                {% for i, j in s.items %}
+                    <input type="hidden" name="Items[{{sc}}].{{i}}" value="{{j}}">
+                {% endfor %}
+            {% endwith %}
+        {% endfor %}
+        7180.0 ETB
+        <input type="submit" value="Pay with yenepay">
+    </form>
+</body>
+</html>

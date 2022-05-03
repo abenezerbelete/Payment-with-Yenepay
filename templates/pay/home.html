@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Yenepay with Python(Django) done by Abenezer</title>
+</head>
+<body>
+    <h3>Welcome to Yenepay with Python(Django) done by Abenezer</h3>
+    <h4>choose way to pay</h4>
+    <ul>
+        <li>
+            <a href="{% url 'express-payment' %}">Pay with express</a>
+        </li>
+        <li>
+            <a href="{% url 'cart-payment' %}">Pay with cart</a>
+        </li>
+    </ul>
+</body>
+</html>
